@@ -19,13 +19,23 @@ const postQuery = async (query, values) => {
     }
 }
 
-const getQuery = async (query) => {
+const getPosts = async (column='*', filter) => {
 
     try {
-        await client.query("SELECT * from $1", query); 
+        const likes = await client.query("SELECT $1 FROM posts WHERE id = $2", column, filter); 
+        return likes.rows; 
     } catch (err) {
         console.error(err); 
     }
 }
 
-module.exports = {postQuery}; 
+const updateLikes = async (id, likes) => {
+
+    try {
+        await client.query("UPDATE user SET likes = $1 WHERE id = $2", likes, id); 
+    } catch (err) {
+        console.error(err); 
+    }
+}
+
+module.exports = {postQuery, getPosts, updateLikes}; 
