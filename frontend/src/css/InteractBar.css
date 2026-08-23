@@ -1,0 +1,25 @@
+.Bar {
+    width:50%;
+    margin: 20px;
+}
+
+.Like {
+   font-size: 150%;
+   background-color: transparent;
+   border-color: transparent;
+   margin-left: 50%;
+}
+
+.Comment {
+   background-color: white;
+   border-radius: 4px;
+   font-size: 150%;
+}
+
+p {
+   color: rgb(255,255,255);
+   font-size: 150%;
+   background-color: transparent;
+   border-color: transparent;
+   margin-left: 50%;
+}

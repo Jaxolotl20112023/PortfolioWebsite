@@ -1,5 +1,6 @@
 import Carousel from "react-bootstrap/Carousel";
 import "../css/DefaultCarousel.css";
+import InteractBar from "./InteractBar";
 
 interface Props {
   imgs: string[];
@@ -17,6 +18,7 @@ const DefaultCarousel = ({ imgs, title, root }: Props) => {
           {imgs.map((img) => (
             <Carousel.Item>
               <img src={`./${root}/${img}`} alt="" />
+              <InteractBar id={img} />
             </Carousel.Item>
           ))}
         </Carousel>
