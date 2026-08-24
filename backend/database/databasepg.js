@@ -42,7 +42,7 @@ const getLikes = async (filter) => {
 const getNumberIDs = async (filter) => {
 
     try {
-        const id = await pool.query("SELECT id FROM posts WHERE id = $1", [filter]); 
+        const id = await pool.query("SELECT id FROM posts WHERE id = $1", filter); 
         return id.rowCount; 
     } catch (err) {
         console.error(err); 
