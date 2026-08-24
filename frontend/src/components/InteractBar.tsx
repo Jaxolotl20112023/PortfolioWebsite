@@ -5,29 +5,48 @@ const likeUrl = new URL(`http://localhost:3500/likes`);
 
 const registerUrl = new URL(`http://localhost:3500/register`);
 
-// const register = async (data = {}) => {
-//   const response = await fetch(registerUrl, {
-//     method: "POST",
-//     headers: { "Content-Type": "application/json" },
-//     body: JSON.stringify(data),
-//   });
+const register = async (data = {}) => {
 
-//   if (!response.ok) throw new Error("Could not update the amount of likes");
-//   return await response.json();
-// };
+  try {
 
-const updateLikes = async (data = {}, id: string = "billy") => {
-  const likeQuery = new URLSearchParams({ id: id }).toString();
-  likeUrl.search = likeQuery;
+    const response = await fetch(registerUrl, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    });
 
-  const response = await fetch(likeUrl, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(data),
-  });
+    if (!response.ok) throw new Error("Could not update the amount of likes");
+  } catch (err) {
+    console.error("Request error! ",err); 
+  }
+};
 
-  if (!response.ok) throw new Error("Could not update the amount of likes");
-  return await response.json();
+const updateLikes = async (data = {}) => {
+
+  const controller = new AbortController(); 
+  const timeoutId = setTimeout(()=> controller.abort(), 5000); 
+
+  console.log("going to update likes??")
+
+  try {
+    const response = await fetch("http://localhost:3500/likes", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    });
+
+    if (!response.ok) throw new Error("Could not update the amount of likes");
+    console.log("successfully updated the likes");
+
+    return await response.json();
+  } catch (err) {
+    console.error("Request error! ",err); 
+  } finally {
+    clearTimeout(timeoutId);
+  }
+
+  
+  
 };
 
 interface Props {
@@ -42,24 +61,15 @@ const InteractBar = ({ id }: Props) => {
   console.log(`ID: ${id}`);
 
   useEffect(() => {
-    const register = async (data = {}) => {
-      const response = await fetch(registerUrl, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      });
 
-      if (!response.ok) throw new Error("Could not update the amount of likes");
-      return await response.json();
-    };
-    register({ currID: id });
-
-    console.log("REGISTERED!");
-
+    register({currID : id}); 
+    
     const fetchLikes = async (id: string = "billy") => {
+      const getLikeUrl = likeUrl;
       const likeQuery = new URLSearchParams({ id: id }).toString();
-      likeUrl.search = likeQuery;
 
+      getLikeUrl.search = likeQuery;
+      
       const response = await fetch(likeUrl, {
         method: "GET",
       });
@@ -69,19 +79,20 @@ const InteractBar = ({ id }: Props) => {
       setNumLikes(data.likes);
     };
     fetchLikes(id);
+
   }, []);
 
   useEffect(() => {
     if (!isMounted.current) {
-      //   console.log(`id: ${id}`);
-      //   const func = async () => register({ currID: id });
-      //   func();
       isMounted.current = true;
       return;
     }
 
-    console.log(numLikes);
-    updateLikes({ likes: numLikes }, id);
+    console.log("Update likes!");
+    console.log("id: ",id);
+    console.log("likes: ",numLikes);
+    updateLikes({ likes: numLikes, id: id});
+
   }, [numLikes]);
 
   return (

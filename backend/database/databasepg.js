@@ -1,29 +1,49 @@
-const {Client} = require('pg');
+const {Client, Pool} = require('pg');
 
-const client = new Client({
-    host: "localhost",
+// const client = new Client({
+//     host: "localhost",
+//     user: "postgres", 
+//     port: 5432,
+//     password: "Apr#2002",
+//     database: "portfolio"
+// })
+
+const pool = new Pool({
     user: "postgres", 
+    host: "localhost", 
+    database:"portfolio",
     port: 5432,
     password: "Apr#2002",
-    database: "portfolio"
-})
 
-client.connect(); 
+    max: 20,
+    idleTimeoutMillis: 30000,
+    connectionTimeoutMillis: 20000
+})
 
 const postQuery = async (query, values) => {
 
     try {
-        await client.query(query,values); 
+        await pool.query(query,values); 
     } catch (err) {
         console.error(err); 
     }
 }
 
-const getPosts = async (column='*', filter) => {
+const getLikes = async (filter) => {
 
     try {
-        const likes = await client.query("SELECT $1 FROM posts WHERE id = $2", column, filter); 
-        return likes.rows; 
+        const likes = await pool.query("SELECT likes FROM posts WHERE id = $1", filter); 
+        return likes.rows[0];
+    } catch (err) {
+        console.error(err); 
+    }
+}
+
+const getNumberIDs = async (filter) => {
+
+    try {
+        const id = await pool.query("SELECT id FROM posts WHERE id = $1", [filter]); 
+        return id.rowCount; 
     } catch (err) {
         console.error(err); 
     }
@@ -32,10 +52,15 @@ const getPosts = async (column='*', filter) => {
 const updateLikes = async (id, likes) => {
 
     try {
-        await client.query("UPDATE user SET likes = $1 WHERE id = $2", likes, id); 
+        
+        await pool.query("UPDATE posts SET likes = $1 WHERE id = $2", [likes,id]); 
     } catch (err) {
         console.error(err); 
     }
 }
 
-module.exports = {postQuery, getPosts, updateLikes}; 
+const closePool = () => {
+    pool.end(); 
+}
+
+module.exports = {postQuery, getLikes, updateLikes, getNumberIDs, closePool}; 
