@@ -5,6 +5,14 @@ const app = express();
 const PORT = process.env.PORT || 3500; 
 const {closePool} = require("../backend/database/databasepg"); 
 
+const timeout = require('connect-timeout'); 
+
+app.use(timeout('10s'));
+
+const haltOnTimeout = (req,res,next) => {
+    if (!req.timedout) next(); 
+}
+
 app.use(cors()); 
 app.use(express.json())
 

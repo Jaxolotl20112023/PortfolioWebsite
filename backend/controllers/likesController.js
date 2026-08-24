@@ -8,8 +8,6 @@ const handleGetLikes = async (req, res) => {
     const id = req.query.id; 
     if (!id) return res.status(400).json({"error" : "Please enter an id!"}); 
 
-    // const db = require('../models/likesDb.json')
-    // const [post] = db.filter((key) => key.id === id)
     console.log("id: ", id);
     const post = await getLikes([id]);
     console.log("likes: ",post);  
