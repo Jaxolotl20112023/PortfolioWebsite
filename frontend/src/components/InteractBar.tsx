@@ -2,13 +2,10 @@ import React, { use, Suspense, useEffect, useState, useRef } from "react";
 import "../css/InteractBar.css";
 
 const likeUrl = new URL(`http://localhost:3500/likes`);
-
 const registerUrl = new URL(`http://localhost:3500/register`);
 
 const register = async (data = {}) => {
-
   try {
-
     const response = await fetch(registerUrl, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -17,17 +14,11 @@ const register = async (data = {}) => {
 
     if (!response.ok) throw new Error("Could not update the amount of likes");
   } catch (err) {
-    console.error("Request error! ",err); 
+    console.error("Request error! ", err);
   }
 };
 
 const updateLikes = async (data = {}) => {
-
-  const controller = new AbortController(); 
-  const timeoutId = setTimeout(()=> controller.abort(), 5000); 
-
-  console.log("going to update likes??")
-
   try {
     const response = await fetch("http://localhost:3500/likes", {
       method: "POST",
@@ -40,13 +31,8 @@ const updateLikes = async (data = {}) => {
 
     return await response.json();
   } catch (err) {
-    console.error("Request error! ",err); 
-  } finally {
-    clearTimeout(timeoutId);
+    console.error("Request error! ", err);
   }
-
-  
-  
 };
 
 interface Props {
@@ -58,18 +44,15 @@ const InteractBar = ({ id }: Props) => {
   const [numLikes, setNumLikes] = useState(0);
   const isMounted = useRef(false);
 
-  console.log(`ID: ${id}`);
-
   useEffect(() => {
+    register({ currID: id });
 
-    register({currID : id}); 
-    
     const fetchLikes = async (id: string = "billy") => {
       const getLikeUrl = likeUrl;
       const likeQuery = new URLSearchParams({ id: id }).toString();
 
       getLikeUrl.search = likeQuery;
-      
+
       const response = await fetch(likeUrl, {
         method: "GET",
       });
@@ -79,7 +62,6 @@ const InteractBar = ({ id }: Props) => {
       setNumLikes(data.likes);
     };
     fetchLikes(id);
-
   }, []);
 
   useEffect(() => {
@@ -88,11 +70,7 @@ const InteractBar = ({ id }: Props) => {
       return;
     }
 
-    console.log("Update likes!");
-    console.log("id: ",id);
-    console.log("likes: ",numLikes);
-    updateLikes({ likes: numLikes, id: id});
-
+    updateLikes({ likes: numLikes, id: id });
   }, [numLikes]);
 
   return (

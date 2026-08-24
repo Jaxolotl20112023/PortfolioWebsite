@@ -1,6 +1,7 @@
 import DefaultCarousel from "./components/DefaultCarousel";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
+import GenericCard from "./components/GenericCard";
 
 const App = () => {
   return (
@@ -29,6 +30,7 @@ const App = () => {
           root="Clubs"
         />
       </center>
+      <GenericCard></GenericCard>
     </div>
   );
 };
