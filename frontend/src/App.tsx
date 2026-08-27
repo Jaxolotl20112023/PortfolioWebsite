@@ -30,7 +30,14 @@ const App = () => {
           root="Clubs"
         />
       </center>
-      <GenericCard></GenericCard>
+      <div className="cardContainer">
+        <GenericCard title="Test" img_url="HCA/HCA1.jpg">
+          My name is Jaxon Shimazu and I am a Sophomore at Waiakea High. I first
+          started programming when I was 8 and have never stopped since. This
+          website is a little about me, what I do, and my goals for my future...
+          let's{" "}
+        </GenericCard>
+      </div>
     </div>
   );
 };

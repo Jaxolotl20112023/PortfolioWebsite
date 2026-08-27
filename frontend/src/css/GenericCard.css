@@ -1,4 +1,21 @@
 .Card {
-    width: 18rem; 
+    width:25rem;
+    /* display:flex;  */
     background-color: rgb(50,50,50);
+}
+
+.Img {
+    width:100%;
+}
+
+.Title {
+    color: #fff; 
+    justify-self: center;
+}
+
+.Description {
+
+    /* width:25%; */
+    margin: 0px;
+    justify-self: center;
 }
