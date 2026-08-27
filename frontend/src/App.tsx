@@ -25,12 +25,34 @@ const App = () => {
           root="HCA"
         />
         <DefaultCarousel
-          imgs={["Astroday.png", "InterRobotics.png", "Robotics.jpg"]}
-          title="Clubs"
-          root="Clubs"
+          imgs={["Astroday.png", "InterRobotics.png", "Robotics.jpg", "RoboticsBoard.png", "IQVolunteer.png"]}
+          title="Robotics"
+          root="Robotics"
         />
+
+        <div id="clubs">
+          <GenericCard 
+            title="NexTech" 
+            caption="Been volunteering and entering NexTech competitions" 
+            src="HCA1.jpg" 
+            root="HCA"
+          />
+          <GenericCard 
+            title="NexTech" 
+            caption="Been volunteering and entering NexTech competitions" 
+            src="HCA2.jpg" 
+            root="HCA"
+          />
+          <GenericCard 
+            title="NexTech" 
+            caption="Been volunteering and entering NexTech competitions" 
+            src="HCA3.jpg" 
+            root="HCA"
+          />
+        </div>
+        
       </center>
-      <GenericCard></GenericCard>
+      
     </div>
   );
 };

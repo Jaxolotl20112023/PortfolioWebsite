@@ -38,6 +38,12 @@ h1 {
     font-size: 25px;
 }
 
+#clubs {
+    display: flex; 
+    justify-content: flex-start;
+    /* gap: 5px;  */
+}
+
 body {
     background-repeat: no-repeat;
     background-image: linear-gradient(180deg, rgb(0,0,127), rgb(0,0,3));

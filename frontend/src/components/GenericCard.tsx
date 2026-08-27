@@ -2,16 +2,23 @@ import React from "react";
 import Card from "react-bootstrap/Card";
 import "../css/GenericCard.css";
 
-const GenericCard = () => {
+interface Props {
+  title: string; 
+  caption?: string; 
+  src: string; 
+  root?: string;
+}
+
+const GenericCard = ({title, caption, src, root} : Props) => {
   return (
     <div>
       <Card className="Card">
-        <Card.Img variant="top" src="HCA/HCA1.jpg" />
+        <Card.Img className="CardImage" variant="top" src={`${root}/${src}`} />
         <Card.Body>
-          <Card.Title>Generic Title</Card.Title>
-          <Card.Text>Some random ahh text</Card.Text>
+          <Card.Title className="CardTitle">{title}</Card.Title>
+          <Card.Text className="CardText">{caption}</Card.Text>
         </Card.Body>
-      </Card>
+      </Card>      
     </div>
   );
 };
