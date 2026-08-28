@@ -2,16 +2,23 @@ import { useState } from "react";
 import "../css/Comments.css";
 
 const calcOffset = (limit: number, page: number) => {
+  console.log("calc offset page: ", page);
+  console.log("calc offset limit: ", limit);
   return (page - 1) * limit;
 };
 
-const getComments = async (limit: number, offset: number) => {
+const getComments = async (
+  limit: number,
+  offset: number,
+  setCommentContent: React.Dispatch<React.SetStateAction<string[]>>,
+) => {
   const commentsURL = new URL("http://localhost:3500/comment");
   const commentsQuery = new URLSearchParams({
     limit: `${limit}`,
     offset: `${offset}`,
   }).toString();
   commentsURL.search = commentsQuery;
+
   try {
     const response = await fetch(commentsURL, {
       method: "GET",
@@ -19,7 +26,10 @@ const getComments = async (limit: number, offset: number) => {
 
     if (!response.ok) throw new Error("Cannot get the comments from db");
 
-    return await response.json();
+    const comments = await response.json();
+
+    console.log(comments.details.map((comment: any) => comment.content));
+    setCommentContent(comments.details.map((comment: any) => comment.content));
   } catch (err) {
     console.error(err);
   }
@@ -31,11 +41,15 @@ interface Props {
 
 const Comments = ({ limit }: Props) => {
   const [page, setPage] = useState(1);
-  const [offset, setOffset] = useState(calcOffset(page, limit));
+  const [offset, setOffset] = useState(0);
+  const [commentContent, setCommentContent] = useState([""]);
 
   return (
     <div className="Comments-Container">
-      <p className="Comments">test</p>
+      {commentContent.map((comment: any) => (
+        <p className="Comments">{comment}</p>
+      ))}
+
       <input
         className="Comment-Input"
         type="text"
@@ -46,7 +60,7 @@ const Comments = ({ limit }: Props) => {
         onClick={() => {
           setPage((page) => page + 1);
           setOffset(calcOffset(page, limit));
-          const comments = getComments(limit, offset);
+          const comments = getComments(limit, offset, setCommentContent);
           console.log(comments);
         }}
       >

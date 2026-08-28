@@ -5,9 +5,14 @@ const handleGetComments = async (req,res) => {
 
     const {limit,offset} = req.query; 
 
+    console.log(`limit: ${limit}`); 
+    console.log(`offset: ${offset}`); 
+
     try {
         const comments = await getComments(limit,offset); 
         if (!comments) return res.status(400).json({"error" : "Unable to retrieve comments from db"}); 
+
+        console.log("comments: ",comments);
 
         return res.status(200).json({"details" : comments}); 
     } catch (err) {

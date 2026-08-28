@@ -61,7 +61,7 @@ const updateLikes = async (id, likes) => {
 
 const getComments = async (limit, offset) => {
      try {
-        const comments = await pool.query("SELECT content FROM comments ORDER BY published DESC LIMIT $1 OFFSET $2", [limit,offset])
+        const comments = await pool.query("SELECT content FROM comments LIMIT $1 OFFSET $2", [limit,offset])
         return comments.rows; 
      } catch(err) {
         console.error(err); 
