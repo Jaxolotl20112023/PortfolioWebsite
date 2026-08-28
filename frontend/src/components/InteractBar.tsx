@@ -75,19 +75,22 @@ const InteractBar = ({ id }: Props) => {
 
   return (
     <div className="Bar">
-      <button className="Comment">Comment</button>
-      <button
-        className="Like"
-        onClick={() => {
-          setHasLiked(!hasLiked);
-          setNumLikes((prevcount) =>
-            !hasLiked ? prevcount + 1 : prevcount - 1,
-          );
-        }}
-      >
-        {hasLiked ? "❤️" : "🤍"}
-      </button>
-      <p>{numLikes}</p>
+      <button className="Comment">💬</button>
+
+      <div className="Likes">
+        <button
+          className="Like-Button"
+          onClick={() => {
+            setHasLiked(!hasLiked);
+            setNumLikes((prevcount) =>
+              !hasLiked ? prevcount + 1 : prevcount - 1,
+            );
+          }}
+        >
+          {hasLiked ? "❤️" : "🤍"}
+        </button>
+        <p>{numLikes}</p>
+      </div>
     </div>
   );
 };

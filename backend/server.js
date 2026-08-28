@@ -18,6 +18,7 @@ app.use(express.json())
 
 app.use(/\/likes/, require('./routes/Likes'));
 app.use(/\/register/, require('./routes/Register'));
+app.use(/\/comment/,require('./routes/Comments'));
 
 app.listen(PORT, '0.0.0.0', () => {console.log(`Running on ${PORT}`)})
 

@@ -1,20 +1,23 @@
 .Card {
     width:75%; 
     background-color: rgb(50,50,50);
-    /* margin: 20px; */
+    border-radius: 25px;
 }
 
 .CardImage {
     height: 100%;
 }
 
-.CardTitle {
-    color: rgb(255,255,255);
+.Title {
+    color: #fff; 
+    justify-self: center;
+    margin: 15px;
 }
 
-.CardText {
-    font-size: 15px;
-    width: 100%;
-    margin-left: 0%;
+.Description {
+
+    /* width:25%; */
+    margin: 15px;
+    justify-self: center;
 }
 

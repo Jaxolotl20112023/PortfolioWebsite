@@ -9,12 +9,12 @@ const App = () => {
       <h1>Jaxon Shimazu</h1>
       <br />
       <div id="biography">
-        <h5 id="description">
+        <h2 id="description">
           My name is Jaxon Shimazu and I am a Sophomore at Waiakea High. I first
           started programming when I was 8 and have never stopped since. This
           website is a little about me, what I do, and my goals for my future...
           let's <span>JUMP RIGHT IN</span>
-        </h5>
+        </h2>
         <img id="jaxon-pic" src="./Jaxon.png" alt="" />
       </div>
 
@@ -29,30 +29,28 @@ const App = () => {
           title="Robotics"
           root="Robotics"
         />
-
-        <div id="clubs">
-          <GenericCard 
-            title="NexTech" 
-            caption="Been volunteering and entering NexTech competitions" 
-            src="HCA1.jpg" 
-            root="HCA"
-          />
-          <GenericCard 
-            title="NexTech" 
-            caption="Been volunteering and entering NexTech competitions" 
-            src="HCA2.jpg" 
-            root="HCA"
-          />
-          <GenericCard 
-            title="NexTech" 
-            caption="Been volunteering and entering NexTech competitions" 
-            src="HCA3.jpg" 
-            root="HCA"
-          />
-        </div>
-        
       </center>
       
+      <div className="cardContainer">
+        <GenericCard title="Test" img_url="HCA/HCA1.jpg">
+          My name is Jaxon Shimazu and I am a Sophomore at Waiakea High. I first
+          started programming when I was 8 and have never stopped since. This
+          website is a little about me, what I do, and my goals for my future...
+          let's
+        </GenericCard>
+        <GenericCard title="Test" img_url="HCA/HCA1.jpg">
+          My name is Jaxon Shimazu and I am a Sophomore at Waiakea High. I first
+          started programming when I was 8 and have never stopped since. This
+          website is a little about me, what I do, and my goals for my future...
+          let's
+        </GenericCard>
+        <GenericCard title="Test" img_url="HCA/HCA1.jpg">
+          My name is Jaxon Shimazu and I am a Sophomore at Waiakea High. I first
+          started programming when I was 8 and have never stopped since. This
+          website is a little about me, what I do, and my goals for my future...
+          let's
+        </GenericCard>
+      </div>
     </div>
   );
 };

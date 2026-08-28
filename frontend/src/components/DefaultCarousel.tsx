@@ -1,6 +1,7 @@
 import Carousel from "react-bootstrap/Carousel";
 import "../css/DefaultCarousel.css";
 import InteractBar from "./InteractBar";
+import Comments from "./Comments";
 
 interface Props {
   imgs: string[];
@@ -23,6 +24,8 @@ const DefaultCarousel = ({ imgs, title, root }: Props) => {
           ))}
         </Carousel>
       </center>
+
+      <Comments limit={20}></Comments>
     </div>
   );
 };

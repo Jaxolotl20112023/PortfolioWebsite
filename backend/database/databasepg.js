@@ -59,8 +59,25 @@ const updateLikes = async (id, likes) => {
     }
 }
 
+const getComments = async (limit, offset) => {
+     try {
+        const comments = await pool.query("SELECT content FROM comments LIMIT $1 OFFSET $2", [limit,offset])
+        return comments.rows; 
+     } catch(err) {
+        console.error(err); 
+     }
+}
+
+const postComments = async (date, content) => {
+    try {
+        await pool.query("INSERT INTO comments(published,content) VALUES($1,$2)",[date,content]); 
+    } catch(err) {
+        console.error(err); 
+    }
+}
+
 const closePool = () => {
     pool.end(); 
 }
 
-module.exports = {postQuery, getLikes, updateLikes, getNumberIDs, closePool}; 
+module.exports = {postQuery, getLikes, updateLikes, getNumberIDs, closePool, getComments, postComments}; 

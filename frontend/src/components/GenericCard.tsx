@@ -1,24 +1,26 @@
 import React from "react";
 import Card from "react-bootstrap/Card";
-import "../css/GenericCard.css";
+// import "../css/GenericCard.css";
 
 interface Props {
-  title: string; 
-  caption?: string; 
-  src: string; 
-  root?: string;
+  title: string;
+  children?: React.ReactNode;
+  img_url: string;
 }
 
-const GenericCard = ({title, caption, src, root} : Props) => {
+const GenericCard = ({ title, children, img_url }: Props) => {
   return (
-    <div>
-      <Card className="Card">
-        <Card.Img className="CardImage" variant="top" src={`${root}/${src}`} />
-        <Card.Body>
-          <Card.Title className="CardTitle">{title}</Card.Title>
-          <Card.Text className="CardText">{caption}</Card.Text>
+    <div className="Card">
+      <img className="Img" src={img_url} alt="" />
+      <h3 className="Title">{title}</h3>
+      <p className="Description">{children}</p>
+      {/* <Card className="Card">
+        <Card.Img variant="top" src={img_url} />
+        <Card.Body className="CardBody">
+          <Card.Title className="text-white">{title}</Card.Title>
+          <Card.Text>{description}</Card.Text>
         </Card.Body>
-      </Card>      
+      </Card> */}
     </div>
   );
 };
