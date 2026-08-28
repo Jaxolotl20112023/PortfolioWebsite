@@ -1,0 +1,8 @@
+.Comments-Container {
+    width: 20rem;
+    background-color: #000;
+}
+
+.Comment-Input {
+    field-sizing: content;
+}

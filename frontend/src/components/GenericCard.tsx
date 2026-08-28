@@ -11,8 +11,9 @@ interface Props {
 const GenericCard = ({ title, children, img_url }: Props) => {
   return (
     <div className="Card">
-      <img className="Img" src={img_url} alt="" />
       <h3 className="Title">{title}</h3>
+      <img className="Img" src={img_url} alt="" />
+
       <p className="Description">{children}</p>
       {/* <Card className="Card">
         <Card.Img variant="top" src={img_url} />

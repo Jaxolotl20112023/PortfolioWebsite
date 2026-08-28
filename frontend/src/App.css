@@ -1,15 +1,26 @@
+
+:root {
+    --dFont:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    --navy: rgb(0,0,127); 
+    --ink: rgb(0,0,3);
+    --line: rgb(50,50,50); 
+    --background: linear-gradient(180deg, var(--navy), var(--ink));
+}
+
 h1 {
     color: rgb(255,255,255); 
     font-size: 150px;
     text-align: center;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-family: var(--dFont);
 }
 
 .cardContainer {
     display: flex; 
     justify-content: center;
-    /* width: 500px;  */
+    gap: 30px;
 
+    border-width: 2px;
+    border-style: solid;
 }
 
 #root {
@@ -21,14 +32,12 @@ h1 {
     justify-self: center;
     width: 75%; 
     margin: 100px;
-    /* border-style: solid; 
-    border-width: 5px; */
 }
 
 #jaxon-pic {
     justify-self: end;
     border-radius: 14%;
-    margin-left: 5px;
+    margin-left: 20px;
 }
 
 #description {

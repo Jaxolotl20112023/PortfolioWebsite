@@ -2,6 +2,7 @@
     width:25rem;
     /* display:flex;  */
     background-color: rgb(50,50,50);
+    border-radius: 25px;
 }
 
 .Img {
@@ -11,11 +12,12 @@
 .Title {
     color: #fff; 
     justify-self: center;
+    margin: 15px;
 }
 
 .Description {
 
     /* width:25%; */
-    margin: 0px;
+    margin: 15px;
     justify-self: center;
 }
