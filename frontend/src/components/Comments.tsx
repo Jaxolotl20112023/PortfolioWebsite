@@ -36,6 +36,7 @@ const getComments = async (
   limit: number,
   offset: number,
   setCommentContent: React.Dispatch<React.SetStateAction<string[]>>,
+  commentContent: string[]
 ) => {
   const commentsURL = new URL("http://localhost:3500/comment");
   const commentsQuery = new URLSearchParams({
@@ -53,8 +54,12 @@ const getComments = async (
 
     const comments = await response.json();
 
-    console.log(comments.details.map((comment: any) => comment.content));
-    setCommentContent(comments.details.map((comment: any) => comment.content));
+    if (comments.details.length <= 0) return false;
+    
+
+    // console.log(comments.details.map((comment: any) => comment.content));
+    setCommentContent([...comments.details.map((comment: any) => comment.content)]);
+    return true; 
   } catch (err) {
     console.error(err);
   }
@@ -69,6 +74,7 @@ const Comments = ({ limit }: Props) => {
   const [offset, setOffset] = useState(0);
   const [commentContent, setCommentContent] = useState([""]);
   const [inputValue, setInputValue] = useState(""); 
+  const [loadMore, setLoadMore] = useState(true); 
 
   return (
     <div className="Comments-Container">
@@ -87,18 +93,22 @@ const Comments = ({ limit }: Props) => {
         e.preventDefault(); 
         console.log(inputValue);
         await addComment({date : getCurrentDate(), content : inputValue})
-        await getComments(limit,offset, setCommentContent); 
+        await getComments(limit,offset, setCommentContent, commentContent); 
       }} className="Submit">Submit</button>
-      <button
-        onClick={() => {
-          setPage(page+1);
-          setOffset(calcOffset(page, limit));
-          const comments = getComments(limit, offset, setCommentContent);
-          console.log(comments);
-        }}
-      >
-        Load More
-      </button>
+
+      {loadMore && (
+        <button
+          onClick={async () => {
+            setPage(page+1);
+            console.log(page);                    
+            setOffset(calcOffset(limit, page));
+            console.log("offset: ",offset);
+            getComments(limit, offset, setCommentContent,commentContent, setLoadMore);
+          }}>
+          Load More
+        </button>
+      )}
+      
     </div>
   );
 };
